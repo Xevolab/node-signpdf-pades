@@ -33,5 +33,13 @@ const signedDocument = await documentSigner(document, {
 });
 ```
 
+## Testing
+The files signed with this library passed the _ETSI EN 319 142-2 v1.1.1 Additional PAdES signatures profiles_ tests performed by
+[PAdES Conformance Checker](https://signatures-conformance-checker.etsi.org/pub/index.php) by ETSI.
+
+They also seem valid when tested using [DSS Demostration WebApp](https://ec.europa.eu/digital-building-blocks/DSS/webapp-demo/validation), which reported
+
+![image](https://github.com/Xevolab/node-signpdf-pades/assets/20073894/9a415a15-3697-4565-aa24-ae31129bfe19)
+
 ## Limitations
 The code does not deal with visible signatures, meaning that it signs the whole document by adding an invisibile signature field. If there is interest in the future, I can work on code snippet to also add a custom signature text.
