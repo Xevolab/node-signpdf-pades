@@ -1,2 +1,37 @@
 # node-signpdf-pades
-Sign PDF documents with a PaDES Baseline B compatibile signature utilizing node-signpdf
+Sign PDF documents with a PAdES Baseline B compatibile signature utilizing node-signpdf
+
+--
+
+This repo contains some sample code to achieve PAdES-compliant signatues using the `node-singpdf` library. In order to do this, I had to slightly modify the underlying code for the library and its dependency `node-forge`.
+
+These changes were necessary in order to include the _Certificate Identification Version 2_ field in the signed attributes, which contains the SHA256 hash of the certificate used to create the signature.
+
+Credits for the code and some comments are provided at the top of files.
+
+> **I don't plan to keep this repo updated and patched.** Please, use it as inspiration and make sure to always follow the most recent security best practices.
+> 
+> If you discover any issue with the code or want to suggest changes or improvements, feel free to report it in the Issues section of open a PR. I, hower, cannot insure they will be addressed.
+
+# How to use
+
+In oreder to use this code you need to install `node-forge` and `node-signpdf` using NPM
+
+```
+npm i node-forge node-signpdf
+```
+
+The code was created and tested using Forge version `1.3.1` and `node-signpdf` version `1.5.1`. There are links to the correct version of the libraries github in the code itself.
+
+To use the function place the signing certificate in a folder of choice and update the path at the top of the `signPDF` file.
+Then call the default function as 
+```
+const document = fs.readFileSync(__dirname + "/document.pdf");
+const signedDocument = await documentSigner(document, {
+    reason: "Reason for the signature",
+    field: "Name of the signature field"
+});
+```
+
+## Limitations
+The code does not deal with visible signatures, meaning that it signs the whole document by adding an invisibile signature field. If there is interest in the future, I can work on code snippet to also add a custom signature text.
